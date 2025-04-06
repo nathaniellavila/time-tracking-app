@@ -8,7 +8,7 @@
   }
 </script>
 <template>
-  <v-responsive class="border rounded">
+  <v-responsive class="border rounded" max-height="300">
     <v-app :theme="theme">
       <v-app-bar class="px-3">
         <v-spacer></v-spacer>
