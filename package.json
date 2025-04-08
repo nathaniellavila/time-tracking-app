@@ -1,11 +1,13 @@
 {
-<<<<<<< HEAD
+  "name": "timetracking",
   "dependencies": {
     "vuetify": "^3.8.0"
   },
   "devDependencies": {
     "@mdi/font": "^7.4.47"
-=======
+  }
+}
+
   "name": "timetracking",
   "version": "0.0.0",
   "private": true,
