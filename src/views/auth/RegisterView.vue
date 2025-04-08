@@ -32,7 +32,7 @@ function onClick() {
                 <template v-slot:title>
                   <v-img src="/images\finalLogo.png" height="80"></v-img>
                   <h3 class="font-weight-black text-center">TimeTracking</h3>
-                  <p class="text-center"> Registration Form</p>
+                  <p class="text-center font-weight-bold"> Registration Form</p>
                 </template>
 
                 <v-card-text class="bg-surface-light pt-4">
