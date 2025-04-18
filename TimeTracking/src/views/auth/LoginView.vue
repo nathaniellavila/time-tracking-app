@@ -11,7 +11,7 @@
 <template>
   <v-responsive class="border rounded">
     <v-app :theme="theme">
-      <v-app-bar class="px-3" color="primary">
+      <v-app-bar class="px-3" color="green">
         <v-spacer></v-spacer>
 
         <v-btn
@@ -25,34 +25,51 @@
       <v-main>
         <v-container>
           <v-row class="justify-center">
-            <v-col cols="12" md="6" class="mx-auto pt-16">
-              <v-card class="mx-auto" prepend-icon="mdi-login" subtitle="Login"  elevation ="24">
-                <template v-slot:title>
-                  <span class="font-weight-black">TimeTracking </span>
-                </template>
+            <v-col cols="12" md="6" class="mx-auto pt-10"  >
+  <v-card class="mx-auto"  elevation="30" color="green">
+    
+    <!-- Logo above the title, inside the card -->
+    <v-img
+      :src="'/images/logo final.png'"
+      alt="Logo"
+      height="120"
+      class="mt-4 mx-auto"
+      style="max-width: 150px;"
+      contain
+    ></v-img>
 
-                <v-card-text class="bg-surface-light pt-4">
-                  <v-form fast-fail @submit.prevent>
-                    <v-text-field label ="Email" variant = "outlined"></v-text-field>
+    <!-- Title slot -->
+    <template v-slot:title>
+      <div class="text-center">
+        <span class="font-weight-black">TIME TRACKING</span>
+      </div>
+    </template>
 
-                    <v-text-field label ="Password" type ="Password" variant = "outlined"></v-text-field>
+    <!-- Form content -->
+    <v-card-text class="bg-surface-light pt-4">
+      <v-form fast-fail @submit.prevent>
+        <v-text-field label="Email" variant="outlined"></v-text-field>
+        <v-text-field label="Password" type="password" variant="outlined"></v-text-field>
+        <v-btn class="mt-2" color="green" type="submit" prepend-icon="mdi-account" block>Log In</v-btn>
+      </v-form>
 
-                    <v-btn class="mt-2" type="submit" block>Submit</v-btn>
-                  </v-form>
+      <v-divider class="my-5"></v-divider>
 
-                  <v-divider class = "my-5"></v-divider>
+      <h5 class="text-center">
+        Don't have an account?
+        <RouterLink to="/register">Click here to Register</RouterLink>
+      </h5>
+    </v-card-text>
+  </v-card>
+</v-col>
 
-                  <h5 class ="text-center"
-                  >Don't have an account? <RouterLink to="/register">Click here to Register</RouterLink></h5>
-
-                </v-card-text>
-              </v-card>
-            </v-col>
           </v-row>
         </v-container>
       </v-main>
 
-      <v-footer color="primary" border app>2024 - TimeTracking</v-footer>
+      
+
+      <v-footer color="green" border app>2024 - TimeTracking</v-footer>
     </v-app>
   </v-responsive>
 </template>
