@@ -1,4 +1,5 @@
 <script setup>
+<<<<<<< HEAD
 import { ref } from 'vue'
 import { useRouter, RouterLink } from 'vue-router'
 import { supabase } from '@/lib/supabase'
@@ -48,14 +49,31 @@ async function onSubmit() {
   }
 }
 
+=======
+  import { ref } from 'vue'
+  import { useDisplay } from 'vuetify'
+
+  const { mobile } = useDisplay()
+  const theme = ref('light')
+
+  function onClick() {
+    theme.value = theme.value === 'light' ? 'dark' : 'light'
+  }
+>>>>>>> adcc62d79afc9479145838382ec1514896dfa3af
 </script>
 
 <template>
   <v-responsive class="border rounded">
     <v-app :theme="theme">
+<<<<<<< HEAD
       <!-- App Bar -->
       <v-app-bar class="px-3" color="#4B5320">
         <v-spacer></v-spacer>
+=======
+      <v-app-bar class="px-3" color="primary">
+        <v-spacer></v-spacer>
+
+>>>>>>> adcc62d79afc9479145838382ec1514896dfa3af
         <v-btn
           :prepend-icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"
           text="Toggle Theme"
@@ -64,6 +82,7 @@ async function onSubmit() {
         ></v-btn>
       </v-app-bar>
 
+<<<<<<< HEAD
       <!-- Main content -->
       <v-main>
         <v-container>
@@ -122,6 +141,35 @@ async function onSubmit() {
                     Don't have an account?
                     <RouterLink to="/register"> Click here to Register</RouterLink>
                   </h5>
+=======
+      <v-main>
+        <v-container>
+          <v-row class="justify-center">
+            <v-col cols="12" md="6" class="mx-auto pt-16">
+              <v-card class="mx-auto" elevation ="24">
+              
+                <v-card-title> 
+                  <v-img src="/images\finalLogo.png" height="80"></v-img>
+                  <h3 class="font-weight-black text-center">TimeTracking </h3> 
+                  <p class="text-center"> Login Form</p>
+                </v-card-title>
+                <v-card-text class="bg-surface-light pt-4">
+                  <v-divider class = "my-5"></v-divider>
+
+                  <v-form fast-fail @submit.prevent>
+                    <v-text-field label ="Email" variant = "outlined"></v-text-field>
+
+                    <v-text-field label ="Password" type ="Password" variant = "outlined"></v-text-field>
+
+                    <v-btn class="mt-2" type="submit" block color="primary" prepend-icon="mdi-account-plus">Login</v-btn>
+                  </v-form>
+
+                  <v-divider class = "my-5"></v-divider>
+
+                  <h5 class ="text-center"
+                  >Don't have an account? <RouterLink to="/register">Click here to Register</RouterLink></h5>
+
+>>>>>>> adcc62d79afc9479145838382ec1514896dfa3af
                 </v-card-text>
               </v-card>
             </v-col>
@@ -129,6 +177,7 @@ async function onSubmit() {
         </v-container>
       </v-main>
 
+<<<<<<< HEAD
       <!-- Footer -->
       <v-footer color="#4B5320" border app>2024 - TimeTracking</v-footer>
     </v-app>
@@ -141,4 +190,9 @@ async function onSubmit() {
 <v-overlay :model-value="loading" class="align-center justify-center">
   <v-progress-circular indeterminate size="64" color="white" />
 </v-overlay>
+=======
+      <v-footer color="primary" border app>2024 - TimeTracking</v-footer>
+    </v-app>
+  </v-responsive>
+>>>>>>> adcc62d79afc9479145838382ec1514896dfa3af
 </template>

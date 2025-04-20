@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LoginView from '@/views/auth/LoginView.vue'
 import RegisterView from '@/views/auth/RegisterView.vue'
+<<<<<<< HEAD
 import { supabase } from '@/lib/supabase'
 
 const routes = [
@@ -37,6 +38,23 @@ router.beforeEach(async (to, from, next) => {
   } else {
     next()
   }
+=======
+
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes: [
+    {
+      path: '/',
+      name: 'home',
+      component: LoginView
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: RegisterView
+    }
+  ]
+>>>>>>> adcc62d79afc9479145838382ec1514896dfa3af
 })
 
 export default router

@@ -28,7 +28,10 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+<<<<<<< HEAD
 .env.local
 node_modules
 dist
 .env
+=======
+>>>>>>> adcc62d79afc9479145838382ec1514896dfa3af
