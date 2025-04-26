@@ -3,6 +3,7 @@ import LoginView from '@/views/auth/LoginView.vue'
 import RegisterView from '@/views/auth/RegisterView.vue'
 import { supabase } from '@/lib/supabase'
 
+
 const routes = [
   {
     path: '/',
@@ -47,3 +48,4 @@ router.beforeEach(async (to, from, next) => {
 })
 
 export default router
+
