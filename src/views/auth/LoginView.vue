@@ -13,7 +13,7 @@ const password = ref('')
 const errorMessage = ref('')
 const loading = ref(false)
 
-function toggleTheme() {
+function onClick() {
   theme.value = theme.value === 'light' ? 'dark' : 'light'
 }
 
@@ -37,7 +37,6 @@ async function onSubmit() {
     errorMessage.value = error.message
     console.error('Login error:', error)
   } else if (data.session) {
-    // Redirect to dashboard on successful login
     router.push('/dashboard')
   }
 }
@@ -104,10 +103,22 @@ async function onSubmit() {
                       type="submit"
                       prepend-icon="mdi-account"
                       block
+                      :loading="loading"
+                      :disabled="loading"
                     >
                       Log In
                     </v-btn>
                   </v-form>
+
+                  <!-- Error message -->
+                  <v-alert
+                    v-if="errorMessage"
+                    type="error"
+                    dismissible
+                    class="mt-4"
+                  >
+                    {{ errorMessage }}
+                  </v-alert>
 
                   <v-divider class="my-5"></v-divider>
 

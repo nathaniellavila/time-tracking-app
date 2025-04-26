@@ -3,10 +3,13 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { supabase } from '@/lib/supabase'
 import {
+  courseRules,
+  collegeIdRules,
   firstNameRules,
   lastNameRules,
   emailRules,
   passwordRules,
+  yearLevelRules,
   confirmPasswordRules
 } from '../../validators/registerValidators'
 
@@ -37,16 +40,21 @@ const onSubmit = async () => {
   error.value = null
 
   try {
-    const { data, error: signUpError } = await supabase.auth.signUp({
-      email: email.value,
-      password: password.value,
-      options: {
-        data: {
-          first_name: firstName.value,
-          last_name: lastName.value
-        }
+  const { data, error: signUpError } = await supabase.auth.signUp({
+    email: email.value,
+    password: password.value,
+    options: {
+      data: {
+        first_name: firstName.value,
+        last_name: lastName.value,
+        middle_initial: middleInitial.value,
+        college_id: collegeId.value,
+        course: course.value,
+        year_level: yearLevel.value
       }
-    })
+    }
+  })
+
 
     if (signUpError) throw signUpError
 

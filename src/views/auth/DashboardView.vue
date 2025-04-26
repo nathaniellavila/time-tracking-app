@@ -1,10 +1,19 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { useTheme } from 'vuetify'
 
 const router = useRouter()
 const loading = ref(true)
 const error = ref(null)
+
+const themeManager = useTheme()
+const theme = ref(themeManager.global.name.value)
+
+const toggleTheme = () => {
+  theme.value = theme.value === 'light' ? 'dark' : 'light'
+  themeManager.global.name.value = theme.value
+}
 
 const user = ref({
   email: 'sampleuser@example.com'
@@ -70,12 +79,22 @@ const getStatusColor = (status) => {
 }
 </script>
 
+
 <template>
   <v-app>
     <v-app-bar color="#4B5320" title="Dashboard" dark>
-      <v-spacer />
-      <v-btn @click="logout" prepend-icon="mdi-logout" color="red">Logout</v-btn>
-    </v-app-bar>
+  <v-spacer />
+  <v-btn
+  @click="toggleTheme"
+  :prepend-icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"
+  text="Toggle Theme"
+  color="white"
+  class="mr-2"
+/>
+
+  <v-btn @click="logout" prepend-icon="mdi-logout" color="red">Logout</v-btn>
+</v-app-bar>
+
 
     <v-main>
       <v-container class="py-10">
