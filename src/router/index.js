@@ -1,44 +1,35 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
 import LoginView from '@/views/auth/LoginView.vue'
 import RegisterView from '@/views/auth/RegisterView.vue'
 import { supabase } from '@/lib/supabase'
 
+// ROUTES
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: LoginView
-  },
-  {
-    path: '/register',
-    name: 'register',
-    component: RegisterView
-  },
-  {
-    path: '/dashboard',
-    name: 'dashboard',
-    component: () => import('@/views/auth/DashboardView.vue'),
-    meta: { requiresAuth: true }
+  { path: '/', name: 'home', component: LoginView },
+  { path: '/register', name: 'register', component: RegisterView },
+  { 
+    path: '/dashboard', 
+    name: 'dashboard', 
+    component: () => import('@/views/auth/DashboardView.vue'), 
+    meta: { requiresAuth: true } 
   }
 ]
 
+// DETECT IF GITHUB PAGES
+const isGithubPages = import.meta.env.BASE_URL.includes('github.io')
+
+// ROUTER
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: isGithubPages ? createWebHashHistory() : createWebHistory(),
   routes
 })
 
-// Navigation guard for protected routes
+// NAVIGATION GUARD
 router.beforeEach(async (to, from, next) => {
-  // 1. Fetch session
   const { data } = await supabase.auth.getSession()
-
-  // 2. Log it out for debugging
   console.log('Supabase session data:', data)
-
-  // 3. Check auth state
   const isAuth = !!data.session
 
-  // 4. Redirect if not authenticated
   if (to.meta.requiresAuth && !isAuth) {
     next('/')
   } else {
@@ -47,4 +38,3 @@ router.beforeEach(async (to, from, next) => {
 })
 
 export default router
-
