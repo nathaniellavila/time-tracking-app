@@ -64,7 +64,7 @@ async function onSubmit() {
               <v-card class="mx-auto" elevation="30" color="#4B5320">
                 <!-- Logo -->
                 <v-img
-                  :src="'/images/logo final.png'"
+                  :src="'public/images/finalLogo.png'"
                   alt="Logo"
                   height="120"
                   class="mt-4 mx-auto"
