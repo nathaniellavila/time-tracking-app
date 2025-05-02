@@ -13,11 +13,16 @@ const password = ref('')
 const errorMessage = ref('')
 const loading = ref(false)
 
+<<<<<<< HEAD
 function onClick() {
+=======
+function toggleTheme() {
+>>>>>>> 70cbf5a (feat: admindashboard,studentdashboard)
   theme.value = theme.value === 'light' ? 'dark' : 'light'
 }
 
 async function onSubmit() {
+<<<<<<< HEAD
   if (!form.value?.validate()) {
     console.log('Login form is invalid')
     return
@@ -38,6 +43,50 @@ async function onSubmit() {
     console.error('Login error:', error)
   } else if (data.session) {
     router.push('/dashboard')
+=======
+  errorMessage.value = ''
+  loading.value = true
+
+  try {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email.value,
+      password: password.value,
+    })
+
+    if (error) {
+      errorMessage.value = error.message
+      return
+    }
+
+    if (data.session) {
+      const { data: profile, error: profileError } = await supabase
+        .from('profiles')
+        .select('classification')
+        .eq('id', data.session.user.id)
+        .single()
+
+      if (profileError) {
+        errorMessage.value = 'Failed to fetch user profile.'
+        console.error('Profile error:', profileError)
+        return
+      }
+
+      // Save role
+      localStorage.setItem('userRole', profile.classification)
+
+      // Redirect based on role
+      if (profile.classification === 'Admin') {
+        router.push('/admin-dashboard')
+      } else {
+        router.push('/student-dashboard')
+      }
+    }
+  } catch (err) {
+    console.error('Unexpected error:', err)
+    errorMessage.value = 'Unexpected error occurred.'
+  } finally {
+    loading.value = false
+>>>>>>> 70cbf5a (feat: admindashboard,studentdashboard)
   }
 }
 </script>
@@ -49,11 +98,20 @@ async function onSubmit() {
       <v-app-bar class="px-3" color="#4B5320">
         <v-spacer></v-spacer>
         <v-btn
+<<<<<<< HEAD
           :prepend-icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"
           text="Toggle Theme"
           slim
           @click="onClick"
         ></v-btn>
+=======
+  :prepend-icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"
+  text="Toggle Theme"
+  slim
+  @click="toggleTheme"
+></v-btn>
+
+>>>>>>> 70cbf5a (feat: admindashboard,studentdashboard)
       </v-app-bar>
 
       <!-- Main content -->

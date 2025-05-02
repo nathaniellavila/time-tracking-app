@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
@@ -151,9 +152,105 @@ const getStatusColor = (status) => {
             </v-chip>
           </template>
         </v-data-table>
+=======
+<template>
+  <v-app>
+    <v-navigation-drawer app v-model="drawer" class="bg-blue-grey-darken-4" dark>
+      <v-list nav dense>
+        <v-list-item>
+          <v-list-item-title class="text-h6 text-white">Menu</v-list-item-title>
+        </v-list-item>
+
+        <v-divider class="my-2"></v-divider>
+
+        <v-list-item link @click="selectMenu('attendance')" :active="selectedMenu === 'attendance'">
+          <v-list-item-icon>
+            <v-icon>mdi-calendar-check</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>Attendance Monitoring</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item link @click="selectMenu('request')" :active="selectedMenu === 'request'">
+          <v-list-item-icon>
+            <v-icon>mdi-clipboard-text-question</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>Request Features</v-list-item-title>
+        </v-list-item>
+
+        <v-spacer></v-spacer>
+
+        <v-divider class="my-2"></v-divider>
+
+        <v-list-item link @click="logout">
+          <v-list-item-icon>
+            <v-icon>mdi-logout</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>Logout</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-app-bar app color="#4B5320" dark>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-toolbar-title>Time Tracking Dashboard</v-toolbar-title>
+    </v-app-bar>
+
+    <v-main>
+      <v-container fluid class="pa-6">
+        <transition name="fade" mode="out-in">
+          <component :is="currentComponent" key="selectedMenu" />
+        </transition>
+>>>>>>> 70cbf5a (feat: admindashboard,studentdashboard)
       </v-container>
     </v-main>
   </v-app>
 </template>
 
+<<<<<<< HEAD
 
+=======
+<script setup>
+import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import AttendanceMonitoring from '@/views/dashboard/AttendanceMonitoring.vue'
+import RequestFeatures      from '@/views/dashboard/RequestFeatures.vue'
+import { supabase } from '@/lib/supabase'
+
+const drawer = ref(false)
+const selectedMenu = ref('attendance')
+
+const componentsMap = {
+  attendance: AttendanceMonitoring,
+  request: RequestFeatures,
+}
+
+const currentComponent = computed(() => componentsMap[selectedMenu.value] || AttendanceMonitoring)
+
+const router = useRouter()
+
+function selectMenu(menu) {
+  selectedMenu.value = menu
+}
+
+async function logout() {
+  await supabase.auth.signOut()
+  router.push('/')
+}
+
+// Protect pages: redirect if not auth
+supabase.auth.getSession().then(({ data }) => {
+  if (!data.session) {
+    router.push('/')
+  }
+})
+</script>
+
+<style scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+}
+</style>
+>>>>>>> 70cbf5a (feat: admindashboard,studentdashboard)

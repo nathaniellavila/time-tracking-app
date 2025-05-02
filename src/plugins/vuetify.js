@@ -3,6 +3,12 @@ import 'vuetify/styles'
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
 import { md3 } from 'vuetify/blueprints'
 
+<<<<<<< HEAD
+=======
+// main.js or plugins/vuetify.js
+import '@mdi/font/css/materialdesignicons.css'
+
+>>>>>>> 70cbf5a (feat: admindashboard,studentdashboard)
 export default createVuetify({
   blueprint: md3,
   icons: {
